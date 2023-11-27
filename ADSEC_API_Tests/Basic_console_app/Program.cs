@@ -7,9 +7,7 @@ using Oasys.AdSec.Reinforcement.Groups;
 using Oasys.AdSec.Reinforcement.Layers;
 using Oasys.AdSec.StandardMaterials;
 using Oasys.Profiles;
-using Oasys.Units;
-using UnitsNet;
-
+using OasysUnits;
 
 var version = IVersion.Api();
 Console.WriteLine(version);

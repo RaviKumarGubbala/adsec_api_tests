@@ -1,17 +1,7 @@
-using System.Text;
+using Newtonsoft.Json;
 using Oasys.AdSec;
 using Oasys.AdSec.DesignCode;
 using Oasys.AdSec.IO.Serialization;
-using Oasys.AdSec.Reinforcement;
-using Oasys.AdSec.Reinforcement.Groups;
-using Oasys.AdSec.Reinforcement.Layers;
-using Oasys.AdSec.StandardMaterials;
-using Oasys.Profiles;
-using Oasys.Units;
-using System.Diagnostics;
-using UnitsNet;
-using Newtonsoft.Json;
-using Microsoft.VisualBasic.ApplicationServices;
 
 namespace TestWithFormsUI
 {
