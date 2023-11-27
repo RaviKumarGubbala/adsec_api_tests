@@ -8,7 +8,6 @@ using Oasys.AdSec.Reinforcement.Layers;
 using Oasys.AdSec.StandardMaterials;
 using Oasys.Profiles;
 using Oasys.Units;
-using System.Diagnostics;
 using UnitsNet;
 
 
@@ -39,42 +38,48 @@ var model = IAdSec.Create(EN1992.Part1_1.Edition_2004.NationalAnnex.GB.Edition_2
 var solution = model.Analyse(section);
 
 var load = ILoad.Create(Force.FromKilonewtons(-1000), Moment.FromKilonewtonMeters(50), Moment.FromKilonewtonMeters(50));
-//var ulsResult = solution.Strength.Check(load);
-//var slsResult = solution.Serviceability.Check(load);
+var ulsResult = solution.Strength.Check(load);
+var slsResult = solution.Serviceability.Check(load);
 
-//Console.WriteLine(AdSec_API_Utils.Textify.Text(ulsResult));
-//Console.WriteLine(AdSec_API_Utils.Textify.Text(slsResult));
+Console.WriteLine(AdSec_API_Utils.Textify.Text(ulsResult));
+Console.WriteLine(AdSec_API_Utils.Textify.Text(slsResult));
 
 JsonConverter jsonConverter = new JsonConverter(EN1992.Part1_1.Edition_2004.NationalAnnex.GB.Edition_2014);
 string sectionJson = jsonConverter.SectionToJson(section);
 
-//var file = AdSec_API_Utils.FileHelper.GetAdsFileNamewithCurrentTime();
-//using (StreamWriter streamWriter = File.AppendText(file))
-//{
-//    streamWriter.Write(sectionJson);
-//}
+var parsed = JsonParser.Deserialize(sectionJson);
+var section1 = parsed.Sections[0];
+Console.WriteLine(AdSec_API_Utils.Textify.Text(section1));
+
+var file = AdSec_API_Utils.FileHelper.GetAdsFileNamewithCurrentTime();
+using (StreamWriter streamWriter = File.AppendText(file))
+{
+    streamWriter.Write(sectionJson);
+}
 
 //using Process myProcess = new Process();
-//myProcess.StartInfo.FileName = @"C:\Users\ravikumar.gubbala\Desktop\AdSec Versions\AdSec 10.0.6.8\AdSec.exe";
+//myProcess.StartInfo.FileName = @"C:\Program Files\Oasys\AdSec 10.0\AdSec.exe";
 //myProcess.StartInfo.Arguments = " " + "\"" + file + "\"";
 //myProcess.Start();
 
-var parsed = JsonParser.Deserialize(sectionJson);
-var section1 = parsed.Sections[0];
+string filePath = @"C:\Users\ravikumar.gubbala\OneDrive - Arup\Documents\Take_away\AdSec Test files\REsection.ads";
+ReadReinforcement(filePath);
+filePath = @"C:\Users\ravikumar.gubbala\OneDrive - Arup\Documents\Take_away\AdSec Test files\DoubleLayerCircleRft.ads";
+ReadReinforcement(filePath);
 
-Console.WriteLine(AdSec_API_Utils.Textify.Text(section1));
-
-//string filePath = @"C:\Users\ravikumar.gubbala\Desktop\AdSec Test files\REsection.ads";
-//string filePath = @"C:\Users\ravikumar.gubbala\Desktop\AdSec Test files\DoubleLayerCircleRft.ads";
-//string fileJSONstring = File.ReadAllText(filePath);
-//var parsed = JsonParser.Deserialize(fileJSONstring);
-//if(parsed != null)
-//{
-//    var section = parsed.Sections[0];
-//    foreach (IGroup reinfocementGroup in section.ReinforcementGroups)
-//    {
-//        Console.WriteLine(reinfocementGroup.GetType().ToString());
-//    }
-//}
-
+static void ReadReinforcement(string filePath)
+{
+    Console.WriteLine(filePath);
+    ParsedResult parsed;
+    string fileJSONstring = File.ReadAllText(filePath);
+    parsed = JsonParser.Deserialize(fileJSONstring);
+    if (parsed != null)
+    {
+        var section = parsed.Sections[0];
+        foreach (IGroup reinfocementGroup in section.ReinforcementGroups)
+        {
+            Console.WriteLine(reinfocementGroup.GetType().ToString());
+        }
+    }
+}
 

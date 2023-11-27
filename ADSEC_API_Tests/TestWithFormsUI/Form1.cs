@@ -43,8 +43,7 @@ namespace TestWithFormsUI
             bool isExtactFromFolder = true;
             if (isExtactFromFolder)
             {
-                //var rootDir = @"C:\Users\ravikumar.gubbala\Desktop\AdSec Test files";
-                var rootDir = @"C:\Users\ravikumar.gubbala\Desktop\TestAPI";
+                var rootDir = @"C:\Users\ravikumar.gubbala\OneDrive - Arup\Documents\Take_away\AdSec Test files\API_Test";
                 string[] files =
                     Directory.GetFiles(rootDir, "*.ads", SearchOption.TopDirectoryOnly);
 
@@ -70,6 +69,7 @@ namespace TestWithFormsUI
                 return;
             }
 
+            this.infoTextBox.AppendText(Environment.NewLine + filePath + Environment.NewLine);
             string fileJSONstring = File.ReadAllText(filePath);
 
             try
@@ -137,12 +137,13 @@ namespace TestWithFormsUI
                 var oex = ex.InnerException as Oasys.Exceptions.ValidationException;
                 if (oex != null)
                 {
+                    this.infoTextBox.AppendText(Environment.NewLine + ex.InnerException.Message +
+                            Environment.NewLine);
                     //MessageBox.Show(ex.InnerException.Message);
                 }
                 else
                 {
-                    //unknown issue
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(filePath + "\n" + ex.Message);
                 }
             }
         }
