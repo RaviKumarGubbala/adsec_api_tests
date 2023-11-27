@@ -11,6 +11,7 @@ using Oasys.Units;
 using System.Diagnostics;
 using UnitsNet;
 using Newtonsoft.Json;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace TestWithFormsUI
 {
@@ -40,6 +41,9 @@ namespace TestWithFormsUI
         private void extractButton_Click(object sender, EventArgs e)
         {
             this.infoTextBox.Text = String.Empty;
+            var version = IVersion.Api();
+            this.infoTextBox.AppendText(version.ToString() + Environment.NewLine);
+
             bool isExtactFromFolder = true;
             if (isExtactFromFolder)
             {
@@ -52,6 +56,17 @@ namespace TestWithFormsUI
                 {
                     ExtractData(filePath);
                 }
+
+                var temp_file = AdSec_API_Utils.FileHelper.GetTemporaryLogFileName();
+                using (StreamWriter streamWriter = File.AppendText(temp_file))
+                {
+                    streamWriter.Write(this.infoTextBox.Text);
+                }
+
+                FileInfo file_info = new FileInfo(temp_file);
+                var copy_to_file = @"C:\Users\ravikumar.gubbala\AppData\Local\Oasys\AdSec_Tests\" + file_info.Name;
+
+                File.Copy(temp_file, copy_to_file, true);
             }
             else
             {
@@ -146,6 +161,7 @@ namespace TestWithFormsUI
                     MessageBox.Show(filePath + "\n" + ex.Message);
                 }
             }
+
         }
     }
 }
