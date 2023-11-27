@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basic_console_app", "Basic_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdSec_API_Utils", "AdSec_API_Utils\AdSec_API_Utils.csproj", "{9AF0B979-C37B-4F8C-B44A-3309E4D2A101}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWithFormsUI", "TestWithFormsUI\TestWithFormsUI.csproj", "{5B26FE36-840F-49FE-80CA-90A74C6D110A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -23,10 +21,6 @@ Global
 		{9AF0B979-C37B-4F8C-B44A-3309E4D2A101}.Debug|x64.Build.0 = Debug|x64
 		{9AF0B979-C37B-4F8C-B44A-3309E4D2A101}.Release|x64.ActiveCfg = Release|x64
 		{9AF0B979-C37B-4F8C-B44A-3309E4D2A101}.Release|x64.Build.0 = Release|x64
-		{5B26FE36-840F-49FE-80CA-90A74C6D110A}.Debug|x64.ActiveCfg = Debug|x64
-		{5B26FE36-840F-49FE-80CA-90A74C6D110A}.Debug|x64.Build.0 = Debug|x64
-		{5B26FE36-840F-49FE-80CA-90A74C6D110A}.Release|x64.ActiveCfg = Release|x64
-		{5B26FE36-840F-49FE-80CA-90A74C6D110A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

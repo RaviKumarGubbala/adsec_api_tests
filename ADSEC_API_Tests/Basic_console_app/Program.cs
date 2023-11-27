@@ -1,14 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Oasys.AdSec;
 using Oasys.AdSec.DesignCode;
-using Oasys.AdSec.IO.Serialization;
 using Oasys.AdSec.Reinforcement;
 using Oasys.AdSec.Reinforcement.Groups;
 using Oasys.AdSec.Reinforcement.Layers;
 using Oasys.AdSec.StandardMaterials;
 using Oasys.Profiles;
 using Oasys.Units;
-using System.Diagnostics;
 using UnitsNet;
 
 
@@ -39,42 +37,9 @@ var model = IAdSec.Create(EN1992.Part1_1.Edition_2004.NationalAnnex.GB.Edition_2
 var solution = model.Analyse(section);
 
 var load = ILoad.Create(Force.FromKilonewtons(-1000), Moment.FromKilonewtonMeters(50), Moment.FromKilonewtonMeters(50));
-//var ulsResult = solution.Strength.Check(load);
-//var slsResult = solution.Serviceability.Check(load);
+var ulsResult = solution.Strength.Check(load);
+var slsResult = solution.Serviceability.Check(load);
 
-//Console.WriteLine(AdSec_API_Utils.Textify.Text(ulsResult));
-//Console.WriteLine(AdSec_API_Utils.Textify.Text(slsResult));
-
-JsonConverter jsonConverter = new JsonConverter(EN1992.Part1_1.Edition_2004.NationalAnnex.GB.Edition_2014);
-string sectionJson = jsonConverter.SectionToJson(section);
-
-//var file = AdSec_API_Utils.FileHelper.GetAdsFileNamewithCurrentTime();
-//using (StreamWriter streamWriter = File.AppendText(file))
-//{
-//    streamWriter.Write(sectionJson);
-//}
-
-//using Process myProcess = new Process();
-//myProcess.StartInfo.FileName = @"C:\Users\ravikumar.gubbala\Desktop\AdSec Versions\AdSec 10.0.6.8\AdSec.exe";
-//myProcess.StartInfo.Arguments = " " + "\"" + file + "\"";
-//myProcess.Start();
-
-var parsed = JsonParser.Deserialize(sectionJson);
-var section1 = parsed.Sections[0];
-
-Console.WriteLine(AdSec_API_Utils.Textify.Text(section1));
-
-//string filePath = @"C:\Users\ravikumar.gubbala\Desktop\AdSec Test files\REsection.ads";
-//string filePath = @"C:\Users\ravikumar.gubbala\Desktop\AdSec Test files\DoubleLayerCircleRft.ads";
-//string fileJSONstring = File.ReadAllText(filePath);
-//var parsed = JsonParser.Deserialize(fileJSONstring);
-//if(parsed != null)
-//{
-//    var section = parsed.Sections[0];
-//    foreach (IGroup reinfocementGroup in section.ReinforcementGroups)
-//    {
-//        Console.WriteLine(reinfocementGroup.GetType().ToString());
-//    }
-//}
-
+Console.WriteLine(AdSec_API_Utils.Textify.Text(ulsResult));
+Console.WriteLine(AdSec_API_Utils.Textify.Text(slsResult));
 
