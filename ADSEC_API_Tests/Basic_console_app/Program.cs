@@ -60,9 +60,9 @@ using (StreamWriter streamWriter = File.AppendText(file))
 //myProcess.StartInfo.Arguments = " " + "\"" + file + "\"";
 //myProcess.Start();
 
-string filePath = @"C:\Users\ravikumar.gubbala\OneDrive - Arup\Documents\Take_away\AdSec Test files\REsection.ads";
+string filePath = @"C:\Users\ravikumar.gubbala\OneDrive - Arup\Documents\Take_away\AdSecTestFiles\REsection.ads";
 ReadReinforcement(filePath);
-filePath = @"C:\Users\ravikumar.gubbala\OneDrive - Arup\Documents\Take_away\AdSec Test files\DoubleLayerCircleRft.ads";
+filePath = @"C:\Users\ravikumar.gubbala\OneDrive - Arup\Documents\Take_away\AdSecTestFiles\DoubleLayerCircleRft.ads";
 ReadReinforcement(filePath);
 
 static void ReadReinforcement(string filePath)
